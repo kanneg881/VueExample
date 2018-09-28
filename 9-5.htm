@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>9-5</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        .box {
+            border: 2px solid black;
+            display: inline-block;
+            min-width: 80px;
+            min-height: 80px;
+            padding: 40px;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <a href="https://www.google.com" target="_blank" @click.prevent="linkClick">Google</a>
+    <div class="box" @click.stop="message = 'C'">
+        <div class="box" @click.stop="message = 'B'">
+            <div class="box" @click.stop="setA"></div>
+        </div>
+    </div>
+    <div class="box" @click.self="message = 'C'">
+        <div class="box" @click.self="message = 'B'">
+            <div class="box" @click.self="setA"></div>
+        </div>
+    </div>
+    <h1>{{message}}</h1>
+    <h1>{{count}}</h1>
+    <button @click.once="count++">+1</button>
+</div>
+<script>
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            count: 0,
+            message: '',
+        },
+        methods: {
+            linkClick(event) {
+                alert("Don't click me");
+            },
+            setA(event) {
+                event.stopPropagation();
+                this.message = 'A';
+            }
+        },
+    });
+</script>
+</body>
+</html>

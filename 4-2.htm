@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>4-2</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <label>
+        <input type="checkbox" v-bind:checked="selected">
+    </label>
+    <button v-on:click="toggle">Toggle</button>
+    <br>
+    <span>{{count*2}}</span>
+    <label>
+        <input type="checkbox" v-bind:checked="count % 2 === 0">
+    </label>
+    <button v-on:click="add">Add</button>
+</div>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            selected: false,
+            count: 0,
+        },
+        methods: {
+            toggle() {
+                this.selected = !this.selected;
+            },
+            add() {
+                this.count += 1;
+            },
+        },
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>5-6</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <label>
+        <input type="text" v-model="value">
+    </label>
+    <br>
+    <label>
+        <input type="text" v-model="value2">
+    </label>
+    <br>
+    <label>
+        <input type="text" v-model="input.a">
+    </label>
+    <span>{{valueX2}}</span>
+</div>
+<script>
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            value: 0,
+            value2: 0,
+            input: {
+                a: '',
+            }
+        },
+        computed: {
+            valueX2() {
+                return parseInt(this.value, 10) * 2;
+            }
+        },
+        watch: {
+            value(value, oldValue) {
+                console.log(`${oldValue} -> ${value}`);
+            },
+            value2: {
+                handler(value, oldValue) {
+                    console.log(`${oldValue} -> ${value}`);
+                },
+                immediate: true,
+            },
+            input: {
+                handler(value, oldValue) {
+                    console.log(value === oldValue);
+                    console.log(`${oldValue.a} -> ${value.a}`);
+                },
+                deep: true,
+            },
+            valueX2(value, oldValue) {
+                console.log(`${oldValue} -> ${value}`);
+            },
+        },
+    });
+</script>
+</body>
+</html>

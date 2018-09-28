@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>10-1</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        .message2 {
+            white-space: pre;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <label>
+        <input type="text" v-model="message">
+        <!--<input type="text" :value="message" @input="setMessage">-->
+    </label>
+    <h1>{{message}}</h1>
+    <label>
+        <textarea v-model="message2"></textarea>
+    </label>
+    <!--<h1 class="message2">{{message2}}</h1>-->
+    <pre>{{message2}}</pre>
+</div>
+<script>
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            message: '',
+            message2: '',
+        },
+        methods: {
+            setMessage(event) {
+                this.message = event.target.value;
+            },
+        },
+    });
+</script>
+</body>
+</html>

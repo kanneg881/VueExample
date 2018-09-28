@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>8-4</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <ul>
+        <li v-for="number in numbers">{{number}}</li>
+    </ul>
+    <button @click="all">All</button>
+    <button @click="filter">Even</button>
+    <button @click="reverse">Reverse</button>
+    <button @click="sort">Sort</button>
+</div>
+<script>
+    const originalNumbers = [9, 8, 7, 6, 5, 4, 3, 2, 1,];
+
+    new Vue({
+        el: '#app',
+        data: {
+            numbers: originalNumbers,
+        },
+        methods: {
+            all() {
+                this.numbers = originalNumbers;
+            },
+            filter() {
+                this.numbers = originalNumbers.filter(value => (value % 2 === 0));
+            },
+            reverse() {
+                this.numbers.reverse();
+            },
+            sort() {
+                this.numbers = originalNumbers.slice().sort();
+            },
+        }
+    });
+</script>
+</body>
+</html>

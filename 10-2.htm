@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>10-2</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <input type="checkbox" id="check" v-model="agree">
+    <label for="check">Agree</label>
+    <h1>{{agree}}</h1>
+    <button @click="submit">Submit</button>
+    <br>
+    <input type="checkbox" id="check1" value="morning" v-model="times">
+    <label for="check1">Morning</label>
+    <input type="checkbox" id="check2" value="afternoon" v-model="times">
+    <label for="check2">Afternoon</label>
+    <input type="checkbox" id="check3" value="evening" v-model="times">
+    <label for="check3">Evening</label>
+    <h1>{{times}}</h1>
+</div>
+<script>
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            agree: false,
+            times: [],
+        },
+        methods: {
+            submit(event) {
+                if (this.agree !== true) {
+                    alert("Please agree");
+                    return;
+                }
+                alert('complete');
+            },
+        },
+    });
+</script>
+</body>
+</html>

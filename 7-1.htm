@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>7-1</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        #app {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <label>
+        <input type="checkbox" v-model="checked">
+    </label>
+    <template v-if="checked">
+        <h1>跳樓大拍賣</h1>
+        <h2>跳樓大拍賣</h2>
+        <h3>跳樓大拍賣</h3>
+    </template>
+</div>
+<script>
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            checked: false,
+        },
+    });
+</script>
+</body>
+</html>

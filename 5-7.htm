@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>5-7</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <label>
+        <input type="text" v-model="value">
+    </label>
+</div>
+<script>
+    const vm = new Vue({
+        el: '#app',
+        data: {
+          value: 0,
+        },
+        watch: {
+            value(value, oldValue) {
+                console.log(`${oldValue} -> ${value}`);
+
+                if (parseInt(value, 10) === 5) {
+                    vm.$destroy();
+                }
+            },
+        },
+        beforeCreate() {
+            console.log('before create');
+        },
+        created() {
+            console.log('created');
+        },
+        beforeMount() {
+            console.log('before mount');
+        },
+        mounted() {
+            console.log('mounted');
+        },
+        beforeUpdate() {
+            console.log('before update');
+        },
+        updated() {
+            console.log('updated');
+        },
+        beforeDestroy() {
+            console.log('before destroy');
+        },
+        destroyed() {
+            console.log('destroyed');
+        },
+    });
+</script>
+</body>
+</html>

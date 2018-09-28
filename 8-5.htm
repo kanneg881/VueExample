@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>8-5</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <template v-for="header in headers">
+        <h1>{{header}}</h1>
+        <hr>
+    </template>
+</div>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            headers: [
+                'About',
+                'Products',
+                'Contact',
+            ],
+        },
+    });
+</script>
+</body>
+</html>

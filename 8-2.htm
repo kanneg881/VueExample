@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>8-2</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <!--<div v-for="(value, key) in me">{{key}} - {{value}}</div>-->
+    <div v-for="item in me">{{item.key}} - {{item.value}}</div>
+</div>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            // me: {
+            //     name: 'Jackson',
+            //     id: '1',
+            //     age: '25',
+            //     password: '12345678',
+            //     13: '13歲',
+            //     8: '8歲',
+            //     4: '4歲',
+            // },
+            me: [
+                {key: 'name', value: 'Jackson',},
+                {key: 'id', value: '1',},
+                {key: 'age', value: '25',},
+                {key: 'password', value: '12345678',},
+                {key: '13', value: '13歲',},
+                {key: '8', value: '8歲',},
+                {key: '4', value: '4歲',},
+            ],
+        },
+    });
+</script>
+</body>
+</html>

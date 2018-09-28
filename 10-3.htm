@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>10-3</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <input type="radio" id="radio1" value="male" v-model="gender">
+    <label for="radio1">Male</label>
+    <input type="radio" id="radio2" value="female" v-model="gender">
+    <label for="radio2">Female</label>
+    <input type="radio" id="radio3" value="others" v-model="gender">
+    <label for="radio3">Others</label>
+    <h1>{{gender}}</h1>
+</div>
+<script>
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            gender: 'male',
+            times: [],
+        },
+        methods: {
+            submit(event) {
+                if (this.agree !== true) {
+                    alert("Please agree");
+                    return;
+                }
+                alert('complete');
+            },
+        },
+    });
+</script>
+</body>
+</html>

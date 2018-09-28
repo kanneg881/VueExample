@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>8-1</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <ol>
+        <li v-for="item in todo">{{item}}</li>
+    </ol>
+    <label>
+        <select>
+            <option v-for="(month, index) in 12" :value="index + 1">{{month}}</option>
+            <option v-for="(month, index) in 12" :value="index + 1">{{month}}</option>
+        </select>
+    </label>
+</div>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            todo: [
+                '學會 JavaScript',
+                '學會 Vue',
+                '投遞履歷',
+                '年薪百萬',
+            ],
+            months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December',]
+        },
+    });
+</script>
+</body>
+</html>

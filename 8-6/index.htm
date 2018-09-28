@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>8-6</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        html, body {
+            font-family: Arial, "Microsoft JhengHei", serif;
+        }
+
+        h1 {
+            font-size: 18px;
+        }
+
+        a {
+            color: blue;
+            text-decoration: none;
+        }
+
+        .teacher {
+            font-size: 12px;
+        }
+
+        .lesson {
+            border: 1px solid grey;
+            border-radius: 8px;
+            box-shadow: 4px 4px 20px black;
+            display: inline-block;
+            height: 150px;
+            margin: 12px;
+            overflow: hidden;
+            padding: 150px 8px 8px;
+            position: relative;
+            width: 250px;
+        }
+
+        .image {
+            background-size: cover;
+            background-position: center center;
+            height: 150px;
+            left: 0;
+            position: absolute;
+            top: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <div v-for="lesson in lessons" class="lesson">
+        <div class="image" :style="imgStyle(lesson.img)"></div>
+        <a :href="lesson.url">
+            <h1>{{lesson.title}}</h1>
+        </a>
+        <span class="teacher">{{lesson.teacher}}</span>
+    </div>
+</div>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            lessons: [],
+        },
+        methods: {
+            imgStyle(img) {
+                return {
+                    backgroundImage: `url(${img})`,
+                }
+            },
+        },
+        mounted() {
+            fetch('./data.json').then(response => response.json()).then(lessons => this.lessons = lessons);
+        },
+    });
+</script>
+</body>
+</html>

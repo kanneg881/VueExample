@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>7-2</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        #app {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <label>
+        <input type="checkbox" v-model="checked">
+    </label>
+    <h1 v-if="checked">跳樓大拍賣</h1>
+    <h1 v-else>老闆不在家</h1>
+</div>
+<script>
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            checked: false,
+        },
+    });
+</script>
+</body>
+</html>

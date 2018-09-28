@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>8-7</title>
+</head>
+<body>
+<script>
+    const data = {
+        name: 'point',
+        x: 2,
+        y: 4,
+    };
+
+    // const dataJSON = JSON.stringify(data, ['x', 'y'], 4);
+    const dataJSON = JSON.stringify(data, null, 4);
+    let data2;
+
+    try {
+        data2 = JSON.parse(dataJSON);
+    } catch (exception) {
+        data2 = {};
+    }
+
+
+    console.log(dataJSON);
+    console.log(data2);
+</script>
+</body>
+</html>
