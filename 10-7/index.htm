@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>10-7</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="app">
+    <form @submit.prevent="submit">
+        <label>
+            標題
+            <input type="text" v-model="title">
+        </label>
+        <br>
+        <label>
+            URL
+            <input type="text" v-model="url">
+        </label>
+        <br>
+        <label>
+            講師
+            <select v-model="teacher">
+                <option v-for="teacher in teachers">{{teacher}}</option>
+            </select>
+        </label>
+        <br>
+        <label>
+            完成
+            <input type="checkbox">
+        </label>
+        <br>
+        <label>
+            圖片
+            <input type="file" accept="image/*" @change="fileSelected">
+        </label>
+        <br>
+        <img v-if="image" :src="image" width="200">
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+    <div>
+        <div v-for="lesson in lessons">
+            <img :src="lesson.image">
+            <a :href="lesson.url">{{lesson.title}}</a>
+            <span>{{lesson.teacher}}</span>
+            <span v-if="lesson.completed">完成</span>
+            <span v-else>未完成</span>
+        </div>
+    </div>
+</div>
+<script>
+    const API = 'http://localhost:8081/';
+
+    new Vue({
+        el: '#app',
+        data: {
+            title: '',
+            url: '',
+            teacher: '',
+            teachers: ['John', 'Jack', 'Jason', 'Jackson',],
+            complete: false,
+            image: '',
+            lessons: [],
+        },
+        methods: {
+            fileSelected(event) {
+                const file = event.target.files.item(0);
+                const reader = new FileReader();
+                reader.addEventListener('load', this.imageLoaded);
+                reader.readAsDataURL(file);
+            },
+            imageLoaded(event) {
+                this.image = event.target.result;
+            },
+            submit() {
+                $.post(API, {
+                    title: this.title,
+                    url: this.url,
+                    teacher: this.teacher,
+                    completed: this.completed,
+                    image: this.image,
+                }).then(() => {
+                    this.title = '';
+                    this.url = '';
+                    this.teacher = '';
+                    this.completed = false;
+                    this.image = '';
+                    this.loadLessons();
+                });
+            },
+            loadLessons() {
+                $.get(API).then(lessons => this.lessons = lessons);
+            }
+        },
+        mounted() {
+            this.loadLessons();
+        },
+    });
+</script>
+</body>
+</html>

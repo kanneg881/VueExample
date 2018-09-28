@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>10-5</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <label>
+        <input type="file" @change="fileSelected">
+    </label>
+    <img v-if="image" :src="image" width="200">
+    <button @click="upload">Upload</button>
+</div>
+<script>
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            image: '',
+            file: null,
+        },
+        methods: {
+            fileSelected(event) {
+                this.file = event.target.files.item(0);
+                const reader = new FileReader();
+                reader.addEventListener('load', this.imageLoaded);
+                reader.readAsDataURL(this.file);
+            },
+            imageLoaded(event) {
+                this.image = event.target.result;
+            },
+            upload(event) {
+                const form = new FormData();
+                form.append(this.file, this.file.name);
+
+                // axios.post('/upload', form);
+            },
+        },
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>10-6</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <label>
+        <input type="text" v-model.lazy="message">
+    </label>
+    <h1>{{message}}</h1>
+    <label>
+        <input type="text" v-model.number="number">
+    </label>
+    <h1>{{number + 1}}</h1>
+    <label>
+        <input type="text" v-model.trim="text">
+    </label>
+    <h1>[{{text}}]</h1>
+</div>
+<script>
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            message: '',
+            number: 0,
+            text: '',
+        },
+        methods: {
+            fileSelected(event) {
+                this.file = event.target.files.item(0);
+                const reader = new FileReader();
+                reader.addEventListener('load', this.imageLoaded);
+                reader.readAsDataURL(this.file);
+            },
+            imageLoaded(event) {
+                this.image = event.target.result;
+            },
+            upload(event) {
+                const form = new FormData();
+                form.append(this.file, this.file.name);
+
+                // axios.post('/upload', form);
+            },
+        },
+    });
+</script>
+</body>
+</html>
