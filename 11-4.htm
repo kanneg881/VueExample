@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>11-4</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <todo-list></todo-list>
+</div>
+<script>
+    Vue.component('todo-item', {
+        props: ['item'],
+        template: `
+<li>{{item}}</li>`,
+    });
+
+    Vue.component('todo-input', {
+        data() {
+            return {
+                text: '',
+            };
+        },
+        methods: {
+            submit() {
+                this.$emit('submit', this.text);
+                this.text = '';
+            },
+        },
+        template: `
+<form @submit.prevent="submit">
+    <input type="text" v-model="text">
+    <button type="submit">Submit</button>
+</form>`,
+    });
+
+    Vue.component('todo-list', {
+        data() {
+            return {
+                todos: ['a', 'b', 'c'],
+            };
+        },
+        methods: {
+            addTodo(text) {
+                this.todos.push(text);
+            },
+        },
+        template: `
+<div>
+    <todo-input @submit="addTodo"></todo-input>
+    <ul><todo-item v-for="todo in todos" :item="todo"></todo-item></ul>
+</div>`,
+    });
+
+    new Vue({
+        el: '#app',
+    });
+</script>
+</body>
+</html>

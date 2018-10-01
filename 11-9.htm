@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>11-9</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+</head>
+<body>
+<script>
+    function getPromiseRandomEmail() {
+        return new Promise(function (resolve) {
+            $.getJSON('https://randomuser.me/api', function (data) {
+                resolve(data.results[0].email);
+            });
+        });
+    }
+
+    function getRandomEmail(callback) {
+        $.getJSON('https://randomuser.me/api', function (data) {
+            callback(data.results[0].email);
+        });
+    }
+
+    async function getEmails() {
+        let emails = [];
+
+        emails.push(await getPromiseRandomEmail());
+        emails.push(await getPromiseRandomEmail());
+        emails.push(await getPromiseRandomEmail());
+
+        console.log(emails);
+    }
+
+    const emails = [];
+    const promiseEmails = [];
+
+    $.ajax({
+        url: 'https://randomuser.me/api',
+        dataType: 'json',
+        success: function (data) {
+            console.log(data.results[0].email);
+        }
+    });
+
+    getRandomEmail(function (email) {
+        console.log(email);
+    });
+
+    getRandomEmail(function (email) {
+        emails.push(email);
+
+        getRandomEmail(function (email) {
+            emails.push(email);
+
+            getRandomEmail(function (email) {
+                emails.push(email);
+                console.log(emails);
+            });
+        });
+    });
+
+    getPromiseRandomEmail().then(
+        function (promiseEmail) {
+            promiseEmails.push(promiseEmail);
+            return getPromiseRandomEmail();
+        }).then(
+        function (promiseEmail) {
+            promiseEmails.push(promiseEmail);
+            return getPromiseRandomEmail();
+        }).then(
+        function (promiseEmail) {
+            promiseEmails.push(promiseEmail);
+            console.log(promiseEmails);
+        });
+
+    getEmails();
+</script>
+</body>
+</html>

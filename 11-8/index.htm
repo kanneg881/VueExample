@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>11-8</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <div>
+        <button @click="component = 'login-form'">Login Form</button>
+        <button @click="component = 'user-check'">User Check</button>
+    </div>
+    <hr>
+    <keep-alive>
+        <component :is="component"></component>
+    </keep-alive>
+</div>
+<script>
+    const API = 'http://localhost:3000';
+
+    Vue.component('user-check', {
+        created() {
+            this.submitDebounced = _.debounce(this.submit, 200);
+        },
+        data() {
+            return {
+                exists: false,
+                userName: '',
+            };
+        },
+        methods: {
+            submit() {
+                axios.get(`${API}/exists/${this.userName || 'default'}`).then(response => {
+                    this.exists = response.data.exists;
+                });
+            },
+        },
+        watch: {
+            userName() {
+                this.submitDebounced();
+            }
+        },
+        template: `
+<div>
+    <label>
+        User Name <input type="text" v-model="userName">
+    </label>
+    <br>
+    <span>{{exists}}</span>
+</div>`,
+    });
+
+    Vue.component('login-form', {
+        data() {
+            return {
+                error: '',
+                loading: false,
+                loggedUser: null,
+                password: '',
+                userName: '',
+            };
+        },
+        methods: {
+            submit() {
+                this.loading = true;
+
+                axios.post(`${API}/login`, {
+                    userName: this.userName,
+                    password: this.password,
+                }).then(response => {
+                    this.loading = false;
+
+                    if (response.data.success) {
+                        this.loggedUser = response.data.name;
+                    } else {
+                        this.error = 'Incorrect user name / password;'
+                    }
+                    console.log(response.data.success);
+                });
+            },
+        },
+        watch: {
+            userName() {
+                this.error = '';
+            },
+            password() {
+                this.error = '';
+            },
+        },
+        template: `
+<h1 v-if="loggedUser">Welcome! {{loggedUser}}</h1>
+<form v-else @submit.prevent="submit">
+    <label>
+        User Name <input type="text" v-model="userName" :disabled="loading">
+    </label>
+    <br>
+    <label>
+        Password <input type="password" v-model="password" :disabled="loading">
+    </label>
+    <br>
+    <button type="submit" :disabled="loading">Submit</button>
+    <br>
+    <span v-if="error">{{error}}</span>
+</form>`,
+    });
+
+    new Vue({
+        el: '#app',
+        data: {
+            component: 'login-form',
+        }
+    });
+</script>
+</body>
+</html>

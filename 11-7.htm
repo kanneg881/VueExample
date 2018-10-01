@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>11-7</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <!-- 只能使用 kebab case -->
+    <!--<say-hello></say-hello>-->
+</div>
+<script>
+    /**
+     * component 可以使用的命名規則
+     *
+     * say-hello kebab-case
+     * sayHello camelCase
+     * SayHello PascalCase
+     */
+    Vue.component('sayHello', {
+        template: `<h1>Hello</h1>`,
+    });
+
+    /**
+     * template 可以使用的命名規則
+     *
+     * say-hello kebab-case
+     * sayHello camelCase
+     * SayHello PascalCase
+     * <sayHello></sayHello> closing tag
+     * <sayHello/> self-closing
+     */
+    new Vue({
+        el: '#app',
+        template: `
+<div>
+<sayHello></sayHello>
+</div>`,
+    });
+</script>
+</body>
+</html>

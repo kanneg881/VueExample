@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>11-1</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <my-component></my-component>
+</div>
+<div id="app2">
+    <my-component></my-component>
+</div>
+<script>
+    Vue.component('my-component', {
+        template: '<div>Global Component</div>',
+    });
+
+    new Vue({
+        el: '#app',
+        components: {
+            'my-component': {
+                template: '<div>local Component</div>',
+            },
+        },
+    });
+
+    new Vue({
+        el: '#app2',
+    });
+</script>
+</body>
+</html>

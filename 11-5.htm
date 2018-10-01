@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>11-5</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <button @click="content = 'lessons'">Lessons</button>
+    <button @click="content = 'apply'">Apply</button>
+    <br>
+    <component :is="content"></component>
+</div>
+<script>
+    Vue.component('apply', {
+        template: `
+<form>
+    <textarea></textarea>
+    <br>
+    <button>Submit</button>
+</form>`,
+    });
+
+    Vue.component('lessons', {
+        template: `
+<ul>
+    <li>Vue 課程</li>
+    <li>React 課程</li>
+    <li>Angular 課程</li>
+</ul>`,
+    });
+
+    new Vue({
+        el: '#app',
+        data: {
+            content: 'lessons',
+        },
+    });
+</script>
+</body>
+</html>
