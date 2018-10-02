@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>12-3</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <h1>{{count}}</h1>
+    <button @click="count++">+1</button>
+    <counter :start="count"></counter>
+</div>
+</body>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            count: 10,
+        },
+        components: {
+            counter: {
+                computed: {
+                    countDoubled() {
+                        return this.count * 2;
+                    },
+                },
+                data() {
+                    return {
+                        count: this.start,
+                    };
+                },
+                props: ['start'],
+                template: `
+<div>
+    <h2>{{count}}</h2>
+    <h2>{{countDoubled}}</h2>
+    <button @click="count++">+1</button>
+</div>`,
+            },
+        }
+    });
+</script>
+</html>

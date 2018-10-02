@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>12-2</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <post v-for="text in posts" :text="text"></post>
+    <post-object v-for="postObject in postObjects" v-bind="postObject"></post-object>
+    <count :number="1"></count>
+    <count :number="number"></count>
+</div>
+</body>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            // text: 'hello',
+            posts: [
+                'hello',
+                'world',
+            ],
+            postObjects: [
+                {author: 'John', text: 'hello'},
+                {author: 'Jack', text: 'world'},
+            ],
+            number: 1,
+        },
+        components: {
+            post: {
+                props: ['text'],
+                template: `
+<div>{{text}}</div>`,
+            },
+            postObject: {
+                props: ['author', 'text'],
+                template: `
+<div>{{author}}: {{text}}</div>`,
+            },
+            count: {
+                props: ['number'],
+                template: `
+<div>{{number + 1}}</div>`,
+            },
+        }
+    });
+</script>
+</html>
