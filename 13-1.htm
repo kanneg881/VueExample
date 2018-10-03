@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>13-1</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <my-button @my-click="clicked"></my-button>
+    <my-counter @count-emit="countEmit"></my-counter>
+    <h1>{{count}}</h1>
+</div>
+</body>
+<script>
+    Vue.component('my-button', {
+        methods: {
+            myClick() {
+                this.$emit('my-click', 1, 2, 3, 4);
+            },
+        },
+        template: `<button @click="myClick">my-button</button>`,
+    });
+
+    Vue.component('my-counter', {
+        data() {
+            return {
+                count: 0,
+            };
+        },
+        methods: {
+            emit() {
+                this.$emit('count-emit', this.count);
+            },
+        },
+        template: `
+<div>
+    <h1>{{count}}</h1>
+    <button @click="count++">+1</button>
+    <button @click="emit">emit</button>
+</div>`,
+    });
+
+    new Vue({
+        el: '#app',
+        data: {
+            count: 0,
+        },
+        methods: {
+            clicked(data1, data2, data3, data4) {
+                alert('clicked ' + `${data1}, ${data2}, ${data3}, ${data4}`);
+            },
+            countEmit(count) {
+                this.count = count;
+            },
+        },
+    });
+</script>
+</html>

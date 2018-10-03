@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>13-2</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <my-button @click.native="buttonClicked"></my-button>
+</div>
+</body>
+<script>
+    Vue.component('my-button', {
+        methods: {
+            myClick() {
+                this.$emit('my-click', 1, 2, 3, 4);
+            },
+        },
+        template: `<button>MY BUTTON</button>`,
+    });
+
+    new Vue({
+        el: '#app',
+        data: {
+            count: 0,
+        },
+        methods: {
+            buttonClicked() {
+                alert('clicked');
+            },
+        },
+    });
+</script>
+</html>

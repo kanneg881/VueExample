@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>13-3</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <my-counter :outer-count.sync="outerCount"></my-counter>
+    <my-counter :outer-count="outerCount" @update="value => outerCount = value"></my-counter>
+    <h1>{{outerCount}}</h1>
+</div>
+</body>
+<script>
+    Vue.component('my-counter', {
+        data() {
+            return {
+                innerCount: this.outerCount,
+            };
+        },
+        methods: {
+            sync() {
+                this.$emit('update:outerCount', this.innerCount);
+            },
+            sync2() {
+                this.$emit('update', this.innerCount);
+            },
+        },
+        props: ['outerCount'],
+        template: `
+<div>
+    <h1>{{innerCount}}</h1>
+    <button @click="innerCount++">+1</button>
+    <button @click="sync">sync</button>
+    <button @click="sync2">sync2</button>
+</div>`,
+    });
+
+    new Vue({
+        el: '#app',
+        data: {
+            outerCount: 10,
+        },
+    });
+</script>
+</html>
