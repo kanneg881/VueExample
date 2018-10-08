@@ -10,6 +10,9 @@ import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
 export default new VueRouter({
+    // history 路徑沒有 #
+    // hash 路徑有 #
+    mode: 'history',
     routes: [
         {
             children: [
