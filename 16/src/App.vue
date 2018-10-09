@@ -3,7 +3,7 @@
         <h1>{{storeCount}}</h1>
         <h1>{{storeCount2}}</h1>
         <h1>{{totalCount}}</h1>
-        <button @click="addCount">Add</button>
+        <button @click="addCount(2)">Add</button>
     </div>
 </template>
 
@@ -30,10 +30,23 @@
             };
         },
         methods: {
-            ...mapMutations(['addCount']),
+            // 用法1
+            // addCount() {
+            //     this.$store.commit({
+            //         type: 'addCount',
+            //         step: 2,
+            //     });
+            // },
+
+            // 用法2
+            // ...mapMutations(['addCount']),
+
+            // 用法3
+            ...mapMutations({
+                addCount: 'addCount',
+            }),
         },
     }
 </script>
-
 <style>
 </style>
