@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>16-2</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vuex"></script>
+</head>
+<body>
+<div id="app">
+    <h1>{{count}}</h1>
+    <button @click="addCount">Add</button>
+</div>
+</body>
+<script>
+    const store = new Vuex.Store({
+        mutations: {
+            addCount(state) {
+                state.count++;
+            },
+        },
+        state: {
+            count: 0,
+        },
+    });
+
+    new Vue({
+        computed: {
+            count() {
+                return this.$store.state.count;
+            },
+        },
+        el: '#app',
+        methods: {
+            addCount() {
+                this.$store.commit('addCount');
+            },
+        },
+        store,
+    });
+</script>
+</html>
