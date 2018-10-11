@@ -3,15 +3,20 @@
         <h1>{{storeCount}}</h1>
         <h1>{{storeCount2}}</h1>
         <h1>{{totalCount}}</h1>
+        <h1>{{countX2}}</h1>
+        <h1>{{countX2XCount}}</h1>
+        <h1>{{xValue}}</h1>
         <button @click="addCount(2)">Add</button>
     </div>
 </template>
 
 <script>
-    import {mapState, mapMutations,} from 'vuex';
+    import {mapGetters, mapMutations, mapState} from 'vuex';
 
     export default {
         computed: {
+            ...mapGetters(['countX2', 'countX2XCount', 'countXValue']),
+
             // 用法1
             // ...mapState(['count']),
 
@@ -23,6 +28,9 @@
                     return this.localCount + state.count;
                 },
             }),
+            xValue() {
+                return this.getCountXValue();
+            },
         },
         data() {
             return {
@@ -45,6 +53,10 @@
             ...mapMutations({
                 addCount: 'addCount',
             }),
+
+            getCountXValue() {
+                return this.countXValue(10);
+            },
         },
     }
 </script>
