@@ -11,7 +11,7 @@
 </template>
 
 <script>
-    import {mapGetters, mapMutations, mapState} from 'vuex';
+    import {mapActions, mapGetters, mapMutations, mapState} from 'vuex';
 
     export default {
         computed: {
@@ -38,6 +38,7 @@
             };
         },
         methods: {
+            ...mapActions(['fetchTodos']),
             // 用法1
             // addCount() {
             //     this.$store.commit({
@@ -58,6 +59,9 @@
                 return this.countXValue(10);
             },
         },
+        mounted() {
+            this.fetchTodos({id: 2}).then(() => {});
+        }
     }
 </script>
 <style>
