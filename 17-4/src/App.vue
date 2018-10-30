@@ -6,7 +6,6 @@
             <h4>{{userName}}</h4>
             <img :src="picture"/>
         </div>
-
     </div>
 </template>
 
