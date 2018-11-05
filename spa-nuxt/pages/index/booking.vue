@@ -1,0 +1,28 @@
+<template>
+    <div>
+        <h1>Booking</h1>
+        <form>
+            <label>
+                <input/>
+            </label>
+            <br>
+            <label>
+                <input/>
+            </label>
+            <br>
+            <label>
+                <input/>
+            </label>
+            <br>
+            <label>
+                <input/>
+            </label>
+            <br>
+            <label>
+                <input/>
+            </label>
+            <br>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</template>
